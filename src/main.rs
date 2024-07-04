@@ -1,6 +1,5 @@
 use bevy::{prelude::App, DefaultPlugins};
 mod systems;
-mod queries;
 mod plugins;
 mod resources;
 mod components;
