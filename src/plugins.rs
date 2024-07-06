@@ -1,5 +1,5 @@
-use bevy::app::{Plugin, Startup, Update};
 use crate::systems::{move_bevy, setup};
+use bevy::app::{Plugin, Startup, Update};
 pub struct FlappyPlugin;
 
 impl Plugin for FlappyPlugin {

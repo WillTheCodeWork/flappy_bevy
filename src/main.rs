@@ -1,10 +1,10 @@
 use bevy::{prelude::App, DefaultPlugins};
-mod systems;
+mod components;
 mod plugins;
 mod resources;
-mod components;
+mod systems;
 fn main() {
     App::new()
-    .add_plugins((DefaultPlugins, plugins::FlappyPlugin))
-    .run();
+        .add_plugins((DefaultPlugins, plugins::FlappyPlugin))
+        .run();
 }

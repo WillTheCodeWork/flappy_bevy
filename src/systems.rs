@@ -1,8 +1,7 @@
 use bevy::{
     asset::AssetServer,
     input::ButtonInput,
-    prelude::{default, Camera2dBundle, Commands, KeyCode, Query, Res},
-    render::render_resource::binding_types::texture_2d,
+    prelude::{default, Camera2dBundle, Commands, KeyCode, Query, Res, ResMut},
     sprite::SpriteBundle,
     time::Time,
     transform::components::Transform,
@@ -20,6 +19,9 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
         },
         Direction::Down,
     ));
+}
+pub fn get_bevy_velocity(commands: Commands) {
+    commands.spawn(Bevy)
 }
 pub fn move_bevy(
     time: Res<Time>,
