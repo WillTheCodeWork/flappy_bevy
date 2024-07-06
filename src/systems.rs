@@ -48,3 +48,14 @@ pub fn move_bevy(
         }
     }
 }
+pub fn scale_pipe(mut pipe_query: Query<&mut Transform, With<Pipe>>) {
+    for mut pipe in &mut pipe_query {
+        pipe.scale.y = 2.3;
+    }
+}
+pub fn scale_bevy(mut bevy_query: Query<&mut Transform, With<Bevy>>) {
+    for mut bevy in &mut bevy_query {
+        bevy.scale.y = 0.5;
+        bevy.scale.x = 0.5;
+    }
+}
