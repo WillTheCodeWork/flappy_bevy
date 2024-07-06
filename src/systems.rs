@@ -1,13 +1,13 @@
 use bevy::{
     asset::AssetServer,
     input::ButtonInput,
-    prelude::{default, Camera2dBundle, Commands, KeyCode, Query, Res, ResMut},
+    prelude::{default, Camera2dBundle, Commands, KeyCode, Query, Res},
     sprite::SpriteBundle,
     time::Time,
     transform::components::Transform,
 };
 
-use crate::components::{Bevy, Direction};
+use crate::components::{Bevy, Direction, Velocity};
 
 pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     commands.spawn(Camera2dBundle::default());
@@ -19,9 +19,12 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
         },
         Direction::Down,
     ));
+    commands.spawn((Bevy, Velocity(0)));
 }
-pub fn get_bevy_velocity(commands: Commands) {
-    commands.spawn(Bevy)
+pub fn change_bevy_velocity(mut velocity_query: Query<&mut Velocity>) {
+    for mut velocity in &mut velocity_query {
+        velocity.0 -= 1;
+    }
 }
 pub fn move_bevy(
     time: Res<Time>,

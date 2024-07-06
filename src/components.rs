@@ -8,4 +8,4 @@ pub enum Direction {
 #[derive(Component)]
 pub struct Bevy;
 #[derive(Component)]
-pub struct Velocity(i32);
+pub struct Velocity(pub i32);
