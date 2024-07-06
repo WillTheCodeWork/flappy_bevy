@@ -7,28 +7,34 @@ use bevy::{
     transform::components::Transform,
 };
 
-use crate::components::{Bevy, Velocity};
+use crate::components::{Bevy, Pipe, Velocity};
 
 pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     commands.spawn(Camera2dBundle::default());
     commands.spawn((
         SpriteBundle {
             texture: asset_server.load("bevy_logo.png"),
-            transform: Transform::from_xyz(100.0, 0.0, 0.0),
             ..default()
         },
         Bevy,
         Velocity(0.0),
     ));
+    commands.spawn((
+        SpriteBundle {
+            texture: asset_server.load("pipe.png"),
+            ..default()
+        },
+        Pipe,
+    ));
 }
-pub fn change_bevy_velocity(mut velocity_query: Query<&mut Velocity, With<Bevy>>, time: Res<Time>) {
+pub fn change_bevy_velocity(mut velocity_query: Query<&mut Velocity, With<Bevy>>) {
     for mut velocity in &mut velocity_query {
         velocity.0 -= 5.0;
     }
 }
 pub fn move_bevy(
     time: Res<Time>,
-    mut bevy_position: Query<(&mut Transform, &mut Velocity)>,
+    mut bevy_position: Query<(&mut Transform, &mut Velocity), With<Bevy>>,
     keyboard: Res<ButtonInput<KeyCode>>,
 ) {
     for (mut transform, mut velocity) in &mut bevy_position {
