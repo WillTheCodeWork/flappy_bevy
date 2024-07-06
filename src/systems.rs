@@ -34,6 +34,7 @@ pub fn change_bevy_velocity(mut velocity_query: Query<&mut Velocity, With<Bevy>>
 }
 pub fn move_bevy(
     time: Res<Time>,
+    //this query looks complicated, but it isn't
     mut bevy_position: Query<(&mut Transform, &mut Velocity), With<Bevy>>,
     keyboard: Res<ButtonInput<KeyCode>>,
 ) {
