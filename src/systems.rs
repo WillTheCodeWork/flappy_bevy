@@ -34,7 +34,6 @@ pub fn move_bevy(
     for (mut transform, mut velocity) in &mut bevy_position {
         transform.translation.y += velocity.0 * time.delta_seconds();
         if keyboard.pressed(KeyCode::Space) {
-            println!("HIUII");
             if velocity.0 < 0.0 {
                 velocity.0 = 0.0;
             }
