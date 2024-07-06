@@ -1,4 +1,6 @@
-use crate::systems::{change_bevy_velocity, move_bevy, scale_bevy, scale_pipe, setup};
+use crate::systems::{
+    change_bevy_velocity, customize_window, move_bevy, scale_bevy, scale_pipe, setup,
+};
 use bevy::app::{Plugin, Startup, Update};
 pub struct FlappyPlugin;
 
@@ -12,6 +14,7 @@ impl Plugin for FlappyPlugin {
                 change_bevy_velocity,
                 scale_pipe,
                 scale_bevy,
+                customize_window,
             ),
         );
     }

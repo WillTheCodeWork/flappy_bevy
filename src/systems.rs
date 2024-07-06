@@ -5,6 +5,7 @@ use bevy::{
     sprite::SpriteBundle,
     time::Time,
     transform::components::Transform,
+    window::{EnabledButtons, PrimaryWindow, Window},
 };
 
 use crate::components::{Bevy, Pipe, Velocity};
@@ -57,5 +58,17 @@ pub fn scale_bevy(mut bevy_query: Query<&mut Transform, With<Bevy>>) {
     for mut bevy in &mut bevy_query {
         bevy.scale.y = 0.5;
         bevy.scale.x = 0.5;
+    }
+}
+pub fn customize_window(mut window_query: Query<&mut Window, With<PrimaryWindow>>) {
+    for mut window in &mut window_query {
+        window.title = "test".into();
+        window.name = Some("me.will.flappy_bevy".into());
+        window.enabled_buttons = EnabledButtons {
+            close: true,
+            minimize: true,
+            maximize: false,
+        };
+        window.resizable = false;
     }
 }
