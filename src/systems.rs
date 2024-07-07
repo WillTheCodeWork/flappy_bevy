@@ -77,6 +77,9 @@ pub fn customize_window(mut window_query: Query<&mut Window, With<PrimaryWindow>
 }
 pub fn move_pipe(mut pipe_query: Query<&mut Transform, With<Pipe>>, time: Res<Time>) {
     for mut pipe in &mut pipe_query {
-        pipe.translation.x -= 150 * time.delta_seconds();
+        pipe.translation.x -= 150 as f32 * time.delta_seconds();
     }
+}
+pub fn respawn_pipes(mut pipe_query: Query<&mut Transform, With<Pipe>>) {
+    
 }
