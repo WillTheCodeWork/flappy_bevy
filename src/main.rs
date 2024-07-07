@@ -1,5 +1,5 @@
 use bevy::{prelude::App, DefaultPlugins};
-mod components;
+mod structs;
 mod plugins;
 mod systems;
 fn main() {

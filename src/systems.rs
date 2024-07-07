@@ -8,10 +8,11 @@ use bevy::{
     window::{EnabledButtons, PrimaryWindow, Window},
 };
 
-use crate::components::{Bevy, Pipe, Velocity};
+use crate::structs::{Bevy, Pipe, Velocity};
 
 pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     commands.spawn(Camera2dBundle::default());
+    //bevy berb
     commands.spawn((
         SpriteBundle {
             texture: asset_server.load("bevy_logo.png"),
@@ -20,9 +21,11 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
         Bevy,
         Velocity(0.0),
     ));
+    //pipe
     commands.spawn((
         SpriteBundle {
             texture: asset_server.load("pipe.png"),
+            transform: Transform::from_xyz(0.0, -300.0, 0.0),
             ..default()
         },
         Pipe,
@@ -70,5 +73,10 @@ pub fn customize_window(mut window_query: Query<&mut Window, With<PrimaryWindow>
             maximize: false,
         };
         window.resizable = false;
+    }
+}
+pub fn move_pipe(mut pipe_query: Query<&mut Transform, With<Pipe>>, time: Res<Time>) {
+    for mut pipe in &mut pipe_query {
+        pipe.translation.x -= 150 * time.delta_seconds();
     }
 }
