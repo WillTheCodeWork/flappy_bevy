@@ -95,11 +95,11 @@ pub fn move_pipe(mut pipe_query: Query<&mut Transform, With<Pipe>>, time: Res<Ti
         pipe.translation.x -= 150 as f32 * time.delta_seconds();
     }
 }
-pub fn respawn_pipes(mut pipe_query: Query<&mut Transform, With<Pipe>>) {
+pub fn respawn_pipes(mut pipe_query: Query<(&mut Transform, &mut TopOrBottom), With<Pipe>>) {
     let mut rng = rand::thread_rng();
     let top_y_options = vec![-150, -50, -250];
     let bottom_y_options = vec![-350, -250, -450];
-    for mut pipe in &mut pipe_query {
+    for (mut pipe, top_or_bottom) in &mut pipe_query {
         
     }
 }
