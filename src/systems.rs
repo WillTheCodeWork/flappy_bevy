@@ -1,16 +1,18 @@
-use bevy::{
+use crate::structs::{Bevy, Pipe, Velocity};
+use bevy::{ 
     asset::AssetServer,
     input::ButtonInput,
     prelude::{default, Camera2dBundle, Commands, KeyCode, Query, Res, With},
     sprite::SpriteBundle,
     time::Time,
     transform::components::Transform,
-    window::{EnabledButtons, PrimaryWindow, Window},
+    window::{EnabledButtons, PrimaryWindow, Window, WindowResolution},
 };
+use rand::Rng;
 
-use crate::structs::{Bevy, Pipe, Velocity};
 
 pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
+    let pipe_x_pos: f32 = 400.0;
     commands.spawn(Camera2dBundle::default());
     //bevy berb
     commands.spawn((
@@ -25,7 +27,15 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     commands.spawn((
         SpriteBundle {
             texture: asset_server.load("pipe.png"),
-            transform: Transform::from_xyz(0.0, -300.0, 0.0),
+            transform: Transform::from_xyz(pipe_x_pos, -300.0, 0.0),
+            ..default()
+        },
+        Pipe,
+    ));
+    commands.spawn((
+        SpriteBundle {
+            texture: asset_server.load("pipe.png"),
+            transform: Transform::from_xyz(pipe_x_pos, 300.0, 0.0),
             ..default()
         },
         Pipe,
@@ -73,6 +83,7 @@ pub fn customize_window(mut window_query: Query<&mut Window, With<PrimaryWindow>
             maximize: false,
         };
         window.resizable = false;
+        window.resolution = WindowResolution::new(1080.0, 600.0).with_scale_factor_override(1.0);
     }
 }
 pub fn move_pipe(mut pipe_query: Query<&mut Transform, With<Pipe>>, time: Res<Time>) {
@@ -81,5 +92,10 @@ pub fn move_pipe(mut pipe_query: Query<&mut Transform, With<Pipe>>, time: Res<Ti
     }
 }
 pub fn respawn_pipes(mut pipe_query: Query<&mut Transform, With<Pipe>>) {
+    let mut rng = rand::thread_rng();
     
+    let bottom_y_options = vec![-350, -250];
+    for mut pipe in &mut pipe_query {
+        pipe.translation.y = -250.0
+    }
 }

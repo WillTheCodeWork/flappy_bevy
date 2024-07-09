@@ -14,6 +14,7 @@ impl Plugin for FlappyPlugin {
                 scale_bevy,
                 customize_window,
                 move_pipe,
+                respawn_pipes,
             ),
         );
     }
