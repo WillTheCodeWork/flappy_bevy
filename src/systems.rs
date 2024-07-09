@@ -1,15 +1,17 @@
-use crate::structs::{Bevy, Pipe, Velocity};
-use bevy::{ 
+use crate::{
+    enums::TopOrBottom,
+    structs::{Bevy, Pipe, Score, Velocity},
+};
+use bevy::{
     asset::AssetServer,
     input::ButtonInput,
-    prelude::{default, Camera2dBundle, Commands, KeyCode, Query, Res, With},
+    prelude::{default, Camera2dBundle, Commands, KeyCode, Query, Res, ResMut, With},
     sprite::SpriteBundle,
     time::Time,
     transform::components::Transform,
     window::{EnabledButtons, PrimaryWindow, Window, WindowResolution},
 };
 use rand::Rng;
-
 
 pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     let pipe_x_pos: f32 = 400.0;
@@ -31,6 +33,7 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
             ..default()
         },
         Pipe,
+        TopOrBottom::Top,
     ));
     commands.spawn((
         SpriteBundle {
@@ -39,6 +42,7 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
             ..default()
         },
         Pipe,
+        TopOrBottom::Bottom,
     ));
 }
 pub fn change_bevy_velocity(mut velocity_query: Query<&mut Velocity, With<Bevy>>) {
@@ -93,9 +97,9 @@ pub fn move_pipe(mut pipe_query: Query<&mut Transform, With<Pipe>>, time: Res<Ti
 }
 pub fn respawn_pipes(mut pipe_query: Query<&mut Transform, With<Pipe>>) {
     let mut rng = rand::thread_rng();
-    
-    let bottom_y_options = vec![-350, -250];
+    let top_y_options = vec![-150, -50, -450];
+    let bottom_y_options = vec![-350, -250, -450];
     for mut pipe in &mut pipe_query {
-        pipe.translation.y = -250.0
+        
     }
 }
